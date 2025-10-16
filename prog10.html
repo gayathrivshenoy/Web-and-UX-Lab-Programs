@@ -1,61 +1,165 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Manipulate HTML Content</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DOM Manipulation — Live Exercise</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-    }
-    button {
-      padding: 10px 15px;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    p {
-      font-size: 18px;
-      color: #2c3e50;
-    }
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4}
+    body{max-width:900px;margin:32px auto;padding:16px}
+    header{display:flex;gap:16px;align-items:center}
+    .card{border:1px solid #3d7792;padding:12px;border-radius:8px;margin-top:12px}
+    button{padding:8px 12px;border-radius:6px;border:1px solid #e9d30d;background:#6d81c4;cursor:pointer}
+    .highlight{background:linear-gradient(90deg, rgba(138, 71, 214, 0.6), rgba(75, 94, 199, 0));}
+    input[type=text]{padding:6px;border-radius:6px;border:1px solid #ccc}
+    ul{padding-left:20px}
   </style>
 </head>
 <body>
+  <header>
+    <h1>DOM Manipulation — Live Exercise</h1>
+    <small>Practice: create / update / remove elements & attributes</small>
+  </header>
 
-  <h2>JavaScript DOM Content Manipulation</h2>
+  <!-- Section 1: Changing text content -->
+  <section class="card" id="textCard">
+    <h2>Update text content</h2>
+    <p id="intro">This text will be changed when you click the button below.</p>
+    <button id="changeTextBtn">Change text</button>
+  </section>
 
-  <!-- Paragraphs to manipulate -->
-  <p id="para1">This is the first paragraph.</p>
-  <p id="para2">This is the second paragraph.</p>
+  <!-- Section 2: Using user input to update DOM -->
+  <section class="card" id="inputCard">
+    <h2>Use input to update DOM</h2>
+    <label>
+      New heading: <input type="text" id="headingInput" placeholder="Type a new heading" />
+    </label>
+    <button id="applyHeading">Apply</button>
+    <h3 id="liveHeading">Original heading</h3>
+  </section>
 
-  <!-- Buttons to trigger manipulation -->
-  <button onclick="changeText()">Change Text</button>
-  <button onclick="appendText()">Append Text</button>
-  <button onclick="clearText()">Clear Text</button>
+  <!-- Section 3: Add / remove list items -->
+  <section class="card" id="listCard">
+    <h2>Manage a list</h2>
+    <input type="text" id="itemInput" placeholder="New todo item" />
+    <button id="addItem">Add item</button>
+    <button id="clearList">Clear list</button>
+    <ul id="todoList">
+      <li>Example item 1 <button class="remove">Remove</button></li>
+      <li>Example item 2 <button class="remove">Remove</button></li>
+    </ul>
+  </section>
+
+  <!-- Section 4: Create element & attributes -->
+  <section class="card" id="createCard">
+    <h2>Create element & attributes</h2>
+    <button id="createImgBtn">Create image element</button>
+    <div id="createdArea"></div>
+  </section>
+
+  <!-- Section 5: Toggle class and styles -->
+  <section class="card" id="toggleCard">
+    <h2>Toggle classes & attributes</h2>
+    <p id="togText">Click the toggle button to highlight this paragraph.</p>
+    <button id="toggleBtn">Toggle highlight</button>
+  </section>
 
   <script>
-    // Function to change the text of an element
-    function changeText() {
-      document.getElementById("para1").innerHTML = "The text has been changed!";
+    // --- Helper: select shortcuts ---
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+    // 1) Change text content
+    const changeTextBtn = $('#changeTextBtn');
+    const intro = $('#intro');
+    changeTextBtn.addEventListener('click', () => {
+      // textContent updates the visible text without interpreting HTML
+      intro.textContent = 'Text has been updated at ' + new Date().toLocaleTimeString();
+    });
+
+    // 2) Use input to update DOM (and demonstrate .value and .innerHTML)
+    $('#applyHeading').addEventListener('click', () => {
+      const val = $('#headingInput').value.trim();
+      const live = $('#liveHeading');
+      if (!val) {
+        live.textContent = 'Original heading';
+        return;
+      }
+      // innerHTML would parse HTML — avoid with untrusted content; we use textContent
+      live.textContent = val;
+    });
+
+    // 3) Add/remove list items with event delegation
+    const todoList = $('#todoList');
+    $('#addItem').addEventListener('click', () => {
+      const text = $('#itemInput').value.trim();
+      if (!text) return;
+      const li = document.createElement('li');
+      li.innerHTML = `${escapeHtml(text)} <button class="remove">Remove</button>`;
+      todoList.appendChild(li);
+      $('#itemInput').value = '';
+    });
+
+    // Clear list
+    $('#clearList').addEventListener('click', () => {
+      // remove children safely
+      while (todoList.firstChild) todoList.removeChild(todoList.firstChild);
+    });
+
+    // Event delegation for remove buttons
+    todoList.addEventListener('click', (e) => {
+      if (e.target && e.target.matches('button.remove')) {
+        const li = e.target.closest('li');
+        li.remove(); // modern DOM method
+      }
+    });
+
+    // 4) Create element and set attributes
+    $('#createImgBtn').addEventListener('click', () => {
+      const area = $('#createdArea');
+      // If already created, toggle removal
+      const existing = $('#createdArea img');
+      if (existing) {
+        existing.remove();
+        return;
+      }
+      const img = document.createElement('img');
+      img.setAttribute('alt', 'Cute placeholder');
+      img.src = 'https://placekitten.com/320/180'; // small placeholder image
+      img.width = 320;
+      img.height = 180;
+      img.style.display = 'block';
+      img.style.marginTop = '8px';
+      area.appendChild(img);
+    });
+
+    // 5) Toggle class
+    $('#toggleBtn').addEventListener('click', () => {
+      $('#togText').classList.toggle('highlight');
+    });
+
+    // Utility: escape HTML to avoid XSS if you later wire server inputs
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, (c) => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
     }
 
-    // Function to append new text to an element
-    function appendText() {
-      document.getElementById("para2").innerHTML += " Appending more content dynamically.";
-    }
+    // Extra: show live DOM info in console (example of reading attributes)
+    console.log('Document title (read):', document.title);
 
-    // Function to clear the text of elements
-    function clearText() {
-      document.getElementById("para1").innerHTML = "";
-      document.getElementById("para2").innerHTML = "";
-    }
+    // Demonstrate attribute read/write
+    document.documentElement.setAttribute('data-demo', 'dom-exercise');
+    console.log('data-demo attr:', document.documentElement.getAttribute('data-demo'));
+
+    // Accessible focus states for keyboard users: allow Enter to add items
+    $('#itemInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        $('#addItem').click();
+      }
+    });
+
   </script>
-
 </body>
 </html>
