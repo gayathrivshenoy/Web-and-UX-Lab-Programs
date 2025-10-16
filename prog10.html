@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manipulate HTML Content</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    p {
+      font-size: 18px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript DOM Content Manipulation</h2>
+
+  <!-- Paragraphs to manipulate -->
+  <p id="para1">This is the first paragraph.</p>
+  <p id="para2">This is the second paragraph.</p>
+
+  <!-- Buttons to trigger manipulation -->
+  <button onclick="changeText()">Change Text</button>
+  <button onclick="appendText()">Append Text</button>
+  <button onclick="clearText()">Clear Text</button>
+
+  <script>
+    // Function to change the text of an element
+    function changeText() {
+      document.getElementById("para1").innerHTML = "The text has been changed!";
+    }
+
+    // Function to append new text to an element
+    function appendText() {
+      document.getElementById("para2").innerHTML += " Appending more content dynamically.";
+    }
+
+    // Function to clear the text of elements
+    function clearText() {
+      document.getElementById("para1").innerHTML = "";
+      document.getElementById("para2").innerHTML = "";
+    }
+  </script>
+
+</body>
+</html>

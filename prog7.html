@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pastel Responsive Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #fdf6f0; /* pastel cream */
+      color: #555;
+    }
+
+    header, footer {
+      background-color: #a8dadc; /* pastel cyan */
+      color: #1d3557; /* dark blue */
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-weight: 600;
+      border-radius: 0 0 15px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem 1rem;
+      background-color: #ffe5d9; /* pastel peach */
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(168, 218, 220, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    section {
+      background-color: #ffcad4; /* pastel pink */
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(255, 202, 212, 0.5);
+      font-size: 1.1rem;
+      color: #6d6875; /* muted plum */
+      line-height: 1.5;
+    }
+
+    footer {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Tablet and up */
+    @media (min-width: 700px) {
+      main {
+        flex-direction: row;
+      }
+      section {
+        flex: 1;
+        margin: 0;
+      }
+    }
+
+    /* Larger desktops */
+    @media (min-width: 1100px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      section {
+        font-size: 1.25rem;
+        padding: 1.5rem 2rem;
+      }
+      footer {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Small phones */
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      section {
+        font-size: 1rem;
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Soft Pastel Responsive Page</h1>
+  </header>
+  <main>
+    <section>
+      <p>This page uses pastel colors and adjusts its layout depending on your screen size.</p>
+    </section>
+    <section>
+      <p>On wider screens, the sections appear side by side, and on smaller devices, they stack vertically.</p>
+    </section>
+  </main>
+  <footer>
+    <p>Made with pastel vibes 🌸</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Design</title>
+  <style>
+    /* Media Query for Tablets and Phones */
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+        background-color: #f9f9f9;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #ccc;
+      }
+    }
+
+    /* Responsive Flexbox Example */
+    .responsive {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+    .responsive div {
+      flex: 1 1 300px;
+      margin: 10px;
+      background-color: #d9eaf7;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Responsive Flexbox</h2>
+
+  <div class="responsive">
+    <div>Hello</div>
+    <div>How are you doing</div>
+    <div>How is everything</div>
+  </div>
+
+  
+  
+
+</body>
+</html>
