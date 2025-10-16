@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UX Design Lab — Intro & Hands-on Exercises</title>
+  <style>
+    :root {
+      --accent: #a28fd0; /* soft lavender */
+      --muted: #7a6eaa; /* muted purple */
+      --bg: #fffaf4; /* cream */
+      --card-bg: #f7f3fb; /* very light lavender */
+      --border: #d7d2e9; /* pastel purple border */
+      --input-bg: #f1e7fe; /* baby blue lavender-ish */
+      --button-bg: #cdb4db; /* pastel purple */
+      --button-hover: #b497d6; /* slightly darker lavender */
+      --error: #d16079; /* muted pastel pink/red */
+      --success: #6a9fb5; /* soft baby blue */
+      --text-primary: #4b3b57; /* dark muted purple */
+    }
+
+    body {
+      font-family: system-ui, Segoe UI, Roboto, Arial;
+      max-width: 1000px;
+      margin: 28px auto;
+      padding: 16px;
+      background-color: var(--bg);
+      color: var(--text-primary);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      box-shadow: 2px 2px 6px rgba(160, 147, 214, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      color: var(--muted);
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font: inherit;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: #ebe6fa;
+    }
+
+    button {
+      background: var(--button-bg);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    button:hover,
+    button:focus {
+      background: var(--button-hover);
+      outline: none;
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      margin: 4px;
+      background-color: #e9e3f7;
+      color: var(--muted);
+    }
+
+    .wire {
+      min-height: 180px;
+      border: 2px dashed var(--border);
+      padding: 8px;
+      border-radius: 6px;
+      background-color: #f1e7fe;
+      color: var(--text-primary);
+    }
+
+    .error {
+      color: var(--error);
+    }
+
+    .success {
+      color: var(--success);
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UX Design Lab</h1>
+    <div class="small">Hands-on: user-centered design, accessibility, usability checks</div>
+  </header>
+
+  <p class="small">This lab guides you through short interactive exercises that illustrate core UX principles: empathy (persona), usability testing (task success), accessibility (forms & ARIA), and low-fidelity prototyping (wireframe).</p>
+
+  <div class="grid">
+    <main>
+      <section class="card">
+        <h2>1. Create a quick persona (empathy)</h2>
+        <p class="small">Fill the fields to generate a brief persona you can reference while designing.</p>
+        <label>Name <input id="personaName" placeholder="Sonal, Raj..."/></label>
+        <label>Age <input id="personaAge" type="number" min="14" max="100"/></label>
+        <label>Primary goal <input id="personaGoal" placeholder="What do they want to achieve?"/></label>
+        <label>Frustrations <input id="personaFrustration" placeholder="e.g., slow load, too many steps"/></label>
+        <button id="makePersona">Generate Persona</button>
+        <div id="personaOut" style="margin-top:10px"></div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2>2. Usability task — Simple checkout flow</h2>
+        <p class="small">Test whether a user can complete a 3-step task. Use the controls on the right to simulate success/failure and note observations.</p>
+        <ol>
+          <li>Find product</li>
+          <li>Add to cart</li>
+          <li>Complete checkout</li>
+        </ol>
+        <label>Task notes (observer): <textarea id="taskNotes" rows="3" placeholder="What did you observe?"></textarea></label>
+        <button id="submitTask">Record task result</button>
+        <div id="taskResult" style="margin-top:8px"></div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2>3. Accessible form (live validation + ARIA)</h2>
+        <p class="small">This demonstrates client-side validation + ARIA live regions for screen reader feedback.</p>
+        <form id="accessForm" novalidate>
+          <label>Full name <input id="fullName" required aria-required="true" /></label>
+          <label>Email <input id="email" type="email" required aria-required="true" /></label>
+          <label>Choose plan <select id="plan"><option>Free</option><option>Pro</option><option>Enterprise</option></select></label>
+          <button type="submit">Sign up</button>
+        </form>
+        <div id="formFeedback" role="status" aria-live="polite" style="margin-top:8px"></div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h2>4. Low-fi wireframe (rapid prototype)</h2>
+        <p class="small">Sketch a simple layout. This contenteditable area mimics a wireframe canvas — focus on structure not visuals.</p>
+        <div id="wireframe" class="wire" contenteditable="true" aria-label="Wireframe canvas" spellcheck="false">Header
+
+- Hero heading
+- Primary CTA
+
+Section: Features
+
+Footer</div>
+        <div style="margin-top:8px"><button id="saveWire">Save wireframe</button> <button id="resetWire">Reset</button></div>
+        <div id="wireSaved" class="small" style="margin-top:6px"></div>
+      </section>
+    </main>
+
+    <aside>
+      <section class="card">
+        <h3>Quick checklist</h3>
+        <ul>
+          <li class="small">Is the primary task obvious?</li>
+          <li class="small">Are controls labelled clearly?</li>
+          <li class="small">Keyboard accessible?</li>
+          <li class="small">Provide feedback & error states?</li>
+          <li class="small">Test with real users early & often</li>
+        </ul>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h3>Color contrast tester</h3>
+        <label>Foreground <input id="fg" value="#0f172a"/></label>
+        <label>Background <input id="bg" value="#ffffff"/></label>
+        <button id="checkContrast">Check contrast</button>
+        <div id="contrastOut" class="small" style="margin-top:8px"></div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h3>Observers notes</h3>
+        <div id="observerNotes" class="small">No results yet.</div>
+      </section>
+    </aside>
+
+  <script>
+    // Persona generator
+    document.getElementById('makePersona').addEventListener('click', () => {
+      const name = document.getElementById('personaName').value.trim();
+      const age = document.getElementById('personaAge').value.trim();
+      const goal = document.getElementById('personaGoal').value.trim();
+      const frustration = document.getElementById('personaFrustration').value.trim();
+      const output = document.getElementById('personaOut');
+      if (!name || !age || !goal) {
+        output.textContent = 'Please fill in at least name, age, and primary goal.';
+        output.className = 'error';
+        return;
+      }
+      output.className = '';
+      output.textContent = `${name}, age ${age}, wants to achieve: "${goal}". Frustrations include: ${frustration || 'none'}.`;
+    });
+
+    // Usability task submit
+    document.getElementById('submitTask').addEventListener('click', () => {
+      const notes = document.getElementById('taskNotes').value.trim();
+      const result = document.getElementById('taskResult');
+      if (!notes) {
+        result.textContent = 'Please enter task notes before submitting.';
+        result.className = 'error';
+        return;
+      }
+      result.className = 'success';
+      result.textContent = 'Task result recorded: ' + notes;
+      // Optionally copy notes to observer area
+      document.getElementById('observerNotes').textContent = notes;
+    });
+
+    // Accessible form validation + ARIA feedback
+    document.getElementById('accessForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const feedback = document.getElementById('formFeedback');
+
+      if (!fullName || !email) {
+        feedback.textContent = 'Please fill in all required fields.';
+        feedback.className = 'error';
+        return;
+      }
+
+      // Simple email validation regex
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailValid) {
+        feedback.textContent = 'Please enter a valid email address.';
+        feedback.className = 'error';
+        return;
+      }
+
+      feedback.textContent = `Thank you for signing up, ${fullName}!`;
+      feedback.className = 'success';
+      e.target.reset();
+    });
+
+    // Wireframe save/reset
+    const wireframe = document.getElementById('wireframe');
+    const wireSaved = document.getElementById('wireSaved');
+
+    document.getElementById('saveWire').addEventListener('click', () => {
+      const content = wireframe.textContent.trim();
+      if (!content) {
+        wireSaved.textContent = 'Wireframe is empty.';
+        wireSaved.className = 'error';
+        return;
+      }
+      localStorage.setItem('wireframeContent', content);
+      wireSaved.textContent = 'Wireframe saved.';
+      wireSaved.className = 'success';
+    });
+
+    document.getElementById('resetWire').addEventListener('click', () => {
+      const saved = localStorage.getItem('wireframeContent');
+      if (saved) {
+        wireframe.textContent = saved;
+        wireSaved.textContent = 'Wireframe restored from saved.';
+        wireSaved.className = 'success';
+      } else {
+        wireframe.textContent = 'Header\n\n- Hero heading\n- Primary CTA\n\nSection: Features\n\nFooter';
+        wireSaved.textContent = 'Wireframe reset to default.';
+        wireSaved.className = '';
+      }
+    });
+
+    // Load saved wireframe on page load
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('wireframeContent');
+      if (saved) {
+        wireframe.textContent = saved;
+      }
+    });
+  </script>
+</body>
+</html>
