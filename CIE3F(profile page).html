@@ -1,0 +1,177 @@
+<!-- 
+    Gayathri's Profile Page
+    Uses: Basic HTML + CSS + a little JavaScript
+    Theme: Pastel
+    Purpose: To display personal info, hobbies, skills, and favourite sites
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+
+    <!-- Internal CSS: for styling the page -->
+    <style>
+        /* Overall page setup */
+        body {
+            background-color: #fce4ec; /* pastel pink background */
+            font-family: Arial, sans-serif; /* clean, readable font */
+            text-align: center; /* centers all text */
+        }
+
+        /* Main heading style */
+        h1 {
+            color: #6a1b9a; /* dark pastel purple */
+        }
+
+        /* Profile image styling */
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* makes it a circle */
+            border: 3px solid #ba68c8; /* pastel purple border */
+        }
+
+        /* Basic info under the image */
+        .info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        /* The section that holds all boxes (hobbies, info, skills) */
+        .container {
+            display: flex; /* places boxes side by side */
+            justify-content: center; /* centers them horizontally */
+            gap: 20px; /* space between boxes */
+            margin-top: 30px;
+        }
+
+        /* Each individual box */
+        .box {
+            background-color: #fff; /* white background */
+            border: 2px solid #f8bbd0; /* light pastel pink border */
+            border-radius: 10px; /* smooth corners */
+            width: 200px;
+            padding: 10px;
+        }
+
+        /* Box headings */
+        .box h2 {
+            color: #8e24aa; /* pastel purple */
+            text-decoration: underline; /* underlined heading */
+        }
+
+        /* Removes bullet points from list items */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Favourite section spacing */
+        .fav {
+            margin-top: 30px;
+        }
+
+        /* Styling links for favourite websites */
+        a {
+            color: #6a1b9a;
+            text-decoration: none;
+        }
+
+        /* Adds underline when mouse hovers */
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styling for the button */
+        button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #ba68c8; /* pastel purple */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer; /* makes cursor a hand when hovering */
+        }
+
+        /* Slightly darker purple when hovered */
+        button:hover {
+            background-color: #9c27b0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page heading -->
+    <h1>My Profile</h1>
+
+    <!-- Profile picture -->
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile Picture">
+
+    <!-- Basic info -->
+    <div class="info">
+        <p><b>Name:</b> Gayathri V Shenoy</p>
+        <p><b>Age:</b> 17</p>
+    </div>
+
+    <!-- Container holds all three boxes -->
+    <div class="container">
+        <!-- Box 1: Hobbies -->
+        <div class="box">
+            <h2>Hobbies</h2>
+            <ul>
+                <li>Reading</li>
+                <li>Travelling</li>
+                <li>Singing</li>
+            </ul>
+        </div>
+
+        <!-- Box 2: Academic Information -->
+        <div class="box">
+            <h2>Information</h2>
+            <ul>
+                <li>RV University</li>
+                <li>BCA (Hons)</li>
+                <li>1st Sem</li>
+            </ul>
+        </div>
+
+        <!-- Box 3: Skills -->
+        <div class="box">
+            <h2>Skills</h2>
+            <ul>
+                <li>PPT Making</li>
+                <li>Communication</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Favourite websites section -->
+    <div class="fav">
+        <h2>My Favourite Websites</h2>
+        <!-- target="_blank" opens the site in a new tab -->
+        <p><a href="https://www.youtube.com" target="_blank">YouTube</a></p>
+        <p><a href="https://www.instagram.com" target="_blank">Instagram</a></p>
+    </div>
+
+    <!-- Button that runs JavaScript function -->
+    <button onclick="changeColor()">Click to change background color</button>
+
+    <!-- JavaScript section -->
+    <script>
+        // Function to randomly change background color
+        function changeColor() {
+            // List of soft pastel background colors
+            const colors = ["#fce4ec", "#e3f2fd", "#f3e5f5", "#e8f5e9", "#fff3e0"];
+            
+            // Picks one random color from the array
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Changes the background color of the whole page
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+
+</body>
+</html>
