@@ -157,6 +157,8 @@
 
     <!-- Button that runs JavaScript function -->
     <button onclick="changeColor()">Click to change background color</button>
+    <button onclick="navigatePage()">Navigate Example</button>
+
 
     <!-- JavaScript section -->
     <script>
@@ -171,6 +173,22 @@
             // Changes the background color of the whole page
             document.body.style.backgroundColor = randomColor;
         }
+
+        <!-- NAVIGATE FUNCTION: takes user to another webpage -->
+
+    function navigatePage() {
+        // Ask user for confirmation before leaving the page
+        let go = confirm("Do you want to visit my GitHub page?");
+        
+        // If user clicks "OK", navigate to the link
+        if (go) {
+            // window.location.href changes the current page
+            window.location.href = "https://github.com/gayathrivshenoy";
+        } else {
+            // If user cancels, display a message on the same page
+            document.getElementById("output").innerText = "Stayed on the same page 😊";
+        }
+    }
     </script>
 
 </body>
