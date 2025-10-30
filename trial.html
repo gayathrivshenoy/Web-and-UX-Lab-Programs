@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+
+    <!-- Internal CSS: for styling the page -->
+    <style>
+        /* Sets up the background, font, and text alignment */
+        body {
+            background-color: #fce4ec; /* pastel pink background */
+            font-family: Arial, sans-serif; /* clean, readable font */
+            text-align: center; /* centers all text on the page */
+        }
+
+        /* Style for the main heading */
+        h1 {
+            color: #6a1b9a; /* dark pastel purple */
+        }
+
+        /* Profile picture styling */
+        img {
+            width: 120px; /* sets width of image */
+            height: 120px; /* sets height of image */
+            border-radius: 50%; /* makes image circular */
+            border: 3px solid #ba68c8; /* adds pastel purple border */
+        }
+
+        /* Basic info (name, age) style */
+        .info {
+            margin-top: 10px; /* adds spacing above the info */
+            font-size: 18px; /* slightly larger text */
+        }
+
+        /* The container that holds the three boxes (hobbies, info, skills) */
+        .container {
+            display: flex; /* places boxes side by side */
+            justify-content: center; /* centers boxes horizontally */
+            gap: 20px; /* space between each box */
+            margin-top: 30px; /* space above the row */
+        }
+
+        /* Style for each individual box */
+        .box {
+            background-color: #fff; /* white background */
+            border: 2px solid #f8bbd0; /* light pastel pink border */
+            border-radius: 10px; /* rounded corners */
+            width: 200px; /* fixed width for uniform boxes */
+            padding: 10px; /* internal spacing */
+        }
+
+        /* Box headings (like Hobbies, Information, Skills) */
+        .box h2 {
+            color: #8e24aa; /* pastel purple text */
+            text-decoration: underline; /* underlines heading */
+        }
+
+        /* Removes bullet points from all lists */
+        ul {
+            list-style-type: none; /* removes bullets */
+            padding: 0; /* removes extra spacing */
+        }
+
+        /* Favourite section styling */
+        .fav {
+            margin-top: 30px; /* adds space above favourite sites */
+        }
+
+        /* Style for links (favourite websites) */
+        a {
+            color: #6a1b9a; /* purple color for links */
+            text-decoration: none; /* removes underline by default */
+        }
+
+        /* Underline links when hovered */
+        a:hover {
+            text-decoration: underline; /* underline appears on hover */
+        }
+
+        /* Style for buttons */
+        button {
+            margin-top: 25px; /* adds space above buttons */
+            padding: 10px 20px; /* button size */
+            background-color: #ba68c8; /* pastel purple background */
+            color: white; /* white text */
+            border: none; /* removes default border */
+            border-radius: 8px; /* smooth corners */
+            cursor: pointer; /* shows hand pointer when hovered */
+        }
+
+        /* Slightly darker shade when button is hovered */
+        button:hover {
+            background-color: #9c27b0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page title -->
+    <h1>My Profile</h1>
+
+    <!-- Profile picture -->
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile Picture">
+
+    <!-- Basic personal info -->
+    <div class="info">
+        <p><b>Name:</b> Gayathri V Shenoy</p>
+        <p><b>Age:</b> 17</p>
+    </div>
+
+    <!-- Container that holds 3 boxes -->
+    <div class="container">
+        <!-- Box 1: Hobbies -->
+        <div class="box">
+            <h2>Hobbies</h2>
+            <ul>
+                <li>Reading</li>
+                <li>Travelling</li>
+                <li>Singing</li>
+            </ul>
+        </div>
+
+        <!-- Box 2: Academic Information -->
+        <div class="box">
+            <h2>Information</h2>
+            <ul>
+                <li>RV University</li>
+                <li>BCA (Hons)</li>
+                <li>1st Sem</li>
+            </ul>
+        </div>
+
+        <!-- Box 3: Skills -->
+        <div class="box">
+            <h2>Skills</h2>
+            <ul>
+                <li>PPT Making</li>
+                <li>Communication</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Favourite websites section -->
+    <div class="fav">
+        <h2>My Favourite Websites</h2>
+        <!-- target="_blank" opens the site in a new tab -->
+        <p><a href="https://www.youtube.com" target="_blank">YouTube</a></p>
+        <p><a href="https://www.instagram.com" target="_blank">Instagram</a></p>
+    </div>
+
+    <!-- Buttons for interactivity -->
+    <button onclick="changeColor()">Click to change background color</button>
+    <button onclick="showSkills()">Show My Skills in Console</button>
+
+    <!-- JavaScript Section -->
+    <script>
+        // ============================
+        // FUNCTION 1: Change background color randomly
+        // ============================
+
+        function changeColor() {
+            // List of soft pastel background colors
+            const colors = ["#fce4ec", "#e3f2fd", "#f3e5f5", "#e8f5e9", "#fff3e0"];
+
+            // Picks a random number between 0 and length of colors array
+            const randomIndex = Math.floor(Math.random() * colors.length);
+
+            // Picks a color from the array using randomIndex
+            const randomColor = colors[randomIndex];
+
+            // Changes the background color of the whole page
+            document.body.style.backgroundColor = randomColor;
+        }
+
+     // ============================
+        // FUNCTION 2: Show skills dynamically using loop + control statements
+        // ============================
+        function showSkills() {
+            // Array of skills
+            const skills = ["PPT Making", "Communication", "Teamwork", "Time Management"];
+
+            // Empty string to build output text
+            let output = "<h3>My Skills:</h3><ul>";
+
+            // For loop to go through each skill
+            for (let i = 0; i < skills.length; i++) {
+                // Check for special skill using if/else
+                if (skills[i] === "Communication") {
+                    // Highlight strongest skill in bold and emoji
+                    output += "<li><b>" + skills[i] + " ⭐ (My Strongest Skill!)</b></li>";
+                } else {
+                    // Normal display for other skills
+                    output += "<li>" + skills[i] + "</li>";
+                }
+            }
+
+            // Close the list
+            output += "</ul>";
+
+            // Another control statement to give feedback
+            if (skills.length > 3) {
+                output += "<p><b>Wow!</b> You have " + skills.length + " amazing skills! 🎉</p>";
+            } else {
+                output += "<p><b>Keep learning more skills!</b> 🌱</p>";
+            }
+
+            // Display result inside the outputBox div
+            document.getElementById("outputBox").innerHTML = output;
+        }
+
+         // ============================
+        // FUNCTION 4: Change font of the name dynamically 👇
+        // ============================
+        function changeFont() {
+            const nameEl = document.getElementById("nameText");
+
+            // Array of different fonts
+            const fonts = ["'Courier New', monospace", "'Georgia', serif", "'Comic Sans MS', cursive", "'Lucida Console', monospace", "'Verdana', sans-serif"];
+
+            // Store current font index in element's dataset (custom property)
+            let currentIndex = parseInt(nameEl.getAttribute("data-font-index")) || 0;
+
+            // Move to next font in the list
+            currentIndex++;
+
+            // If we reach the end of the list, loop back to the first font
+            if (currentIndex >= fonts.length) {
+                currentIndex = 0;
+            }
+
+            // Apply the new font style
+            nameEl.style.fontFamily = fonts[currentIndex];
+
+            // Save the current index for next click
+            nameEl.setAttribute("data-font-index", currentIndex);
+
+            // Update status text
+            document.getElementById("status").textContent = "Font changed to: " + fonts[currentIndex];
+        }
+    </script>
+
+</body>
+</html>
